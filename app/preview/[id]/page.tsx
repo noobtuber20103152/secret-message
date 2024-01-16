@@ -24,8 +24,8 @@ function Page({ params }: any) {
   };
   return (
     <>
-      <div className="max-w-4xl px-2 mx-auto  py-6 md:py-20">
-        <h1 className="md:text-6xl text-3xl text-pink-500 font-bold">
+      <div className="max-w-4xl px-2 mx-auto  py-20">
+        <h1 className="md:text-6xl text-6xl text-pink-500 font-bold">
           Preview secret
         </h1>
         <p className="text-4xl mt-4">You received a secret.</p>

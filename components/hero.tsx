@@ -49,8 +49,8 @@ function Hero({ userData }: any) {
         …with a link that only works one time and then self-destructs.
       </p>
       {createdSecret ? (
-        <div className="py-5 mt-10">
-          <Snippet className="w-full">{secretUrl}</Snippet>
+        <div className="py-5 mt-10 w-full">
+          <Snippet className="w-full text-wrap">{secretUrl}</Snippet>
         </div>
       ) : (
         <div>

@@ -1,13 +1,14 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { Button, Card, CardBody, Input } from "@nextui-org/react";
+import { Button, Card, CardBody, Input, Spinner } from "@nextui-org/react";
 import { EyeIcon, EyeOffIcon, MailIcon, UserIcon } from "lucide-react";
 import toast from "react-hot-toast";
 
 export default function Page() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [user, setUser] = React.useState({
     email: "",
@@ -18,6 +19,7 @@ export default function Page() {
   const onSignup = async () => {
     console.log(user);
     try {
+      setLoading(true);
       const response = await axios.post("/api/users/signup", user);
       console.log(response.status);
       if (response.status == 200) {
@@ -92,9 +94,15 @@ export default function Page() {
           </div>
 
           <div className="my-2">
-            <Button onClick={onSignup} className="w-full" color="primary">
-              Sign Up
-            </Button>
+            {loading ? (
+              <div className="flex itece justify-center">
+                <Spinner />
+              </div>
+            ) : (
+              <Button onClick={onSignup} className="w-full" color="primary">
+                Sign Up
+              </Button>
+            )}
             <p className="text-center mt-2">
               Already have an account{" "}
               <Link href="/login">

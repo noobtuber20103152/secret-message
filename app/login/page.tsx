@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { EyeIcon, EyeOffIcon, MailIcon, UserIcon } from "lucide-react";
-import { Button, Card, CardBody, Input } from "@nextui-org/react";
+import { Button, Card, CardBody, Input, Spinner } from "@nextui-org/react";
 import toast from "react-hot-toast";
 
 export default function SignupPage() {
@@ -86,9 +86,15 @@ export default function SignupPage() {
           </div>
 
           <div className="my-2">
-            <Button onClick={onLogin} className="w-full" color="primary">
-              Log In
-            </Button>
+            {loading ? (
+              <div className="flex items-center justify-center">
+                <Spinner />
+              </div>
+            ) : (
+              <Button onClick={onLogin} className="w-full" color="primary">
+                Log In
+              </Button>
+            )}
             <p className="text-center mt-2">
               Don&apos;t have an account{" "}
               <Link href="/signup">

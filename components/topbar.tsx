@@ -14,12 +14,13 @@ import {
 import { Logo } from "./logo";
 import ThemeButton from "./theme-button";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
 function Topbar() {
   const [userData, setUserData] = useState("nothing");
   const [loading, setLoading] = useState(true);
+  const pathname = usePathname();
   const getUserDetails = async () => {
     try {
       const res = await axios.get("/api/users/me");
@@ -32,13 +33,14 @@ function Topbar() {
   };
   useEffect(() => {
     getUserDetails();
-  }, []);
+  }, [pathname]);
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const logout = async () => {
     try {
       await axios.get("/api/users/logout");
       toast.success("Logout successfully!!");
+      setUserData("nothing");
       router.push("/login");
     } catch (error: any) {
       console.log(error.message);
@@ -58,7 +60,12 @@ function Topbar() {
   ];
 
   return (
-    <Navbar className="fixed" isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
+    <Navbar
+      className="fixed"
+      isBordered
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
