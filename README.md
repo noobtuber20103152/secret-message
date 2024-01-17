@@ -47,6 +47,10 @@ npm run dev
 https://secret-message-wheat.vercel.app/
 ```
 
+## Tech stack
+```bash
+Next JS(v14), Tailwind CSS, Google Cloud, MongoDB
+```
 
 
 ## Video tutorial
