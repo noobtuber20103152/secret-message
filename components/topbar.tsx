@@ -96,7 +96,13 @@ function Topbar() {
               Logout
             </Button>
           ) : status === "authenticated" ? (
-            <Button onClick={async () => await signOut()} color="danger">
+            <Button
+              onClick={async () => {
+                await signOut();
+                setUserData("nothing");
+              }}
+              color="danger"
+            >
               Logout
             </Button>
           ) : (
