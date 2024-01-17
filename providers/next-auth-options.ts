@@ -1,8 +1,7 @@
-import { randomBytes, randomUUID } from "crypto";
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: any = {
   providers: [
     GoogleProvider({
       clientId:
@@ -10,12 +9,11 @@ export const authOptions: NextAuthOptions = {
       clientSecret: "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",
     }),
   ],
+  jwt: {
+    signingKey: "superman",
+  },
   session: {
-    strategy: "database",
-    maxAge: 30 * 24,
-    generateSessionToken: () => {
-      return randomUUID?.() ?? randomBytes(32).toString("hex");
-    },
+    jwt: true,
   },
   callbacks: {
     async session({ session, token }: any) {
@@ -28,7 +26,7 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
-    async redirect({ url, baseUrl }) {
+    redirect: async (url: any, _baseUrl: any) => {
       if (url === "/user") {
         return Promise.resolve("/");
       }
