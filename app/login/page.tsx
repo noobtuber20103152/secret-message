@@ -3,9 +3,16 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { EyeIcon, EyeOffIcon, MailIcon, UserIcon } from "lucide-react";
+import {
+  EyeIcon,
+  EyeOffIcon,
+  MailIcon,
+  SignalIcon,
+  UserIcon,
+} from "lucide-react";
 import { Button, Card, CardBody, Input, Spinner } from "@nextui-org/react";
 import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -41,12 +48,22 @@ export default function SignupPage() {
       console.log(error.message);
     }
   };
+  const loginWithGoogle = async () => {};
   return (
     <div className="max-w-xl h-screen my-auto flex items-center justify-center  mx-auto px-4">
       <Card className="w-full">
         <CardBody>
           <h1 className="text-xl font-bold mb-4">Log In Your Account</h1>
-
+          <div>
+            <Button onClick={() => signIn()} className="w-full" color="default">
+              Login with Google
+            </Button>
+          </div>
+          <div className="flex justify-center items-center w-full my-5">
+            <hr />
+            <span>Or</span>
+            <hr />
+          </div>
           <div className="my-2">
             <Input
               onChange={(e: any) => {

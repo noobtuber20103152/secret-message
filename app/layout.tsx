@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "react-hot-toast";
 import NextTopLoader from "nextjs-toploader";
 import Topbar from "@/components/topbar";
+import NextAuthProvider from "@/providers/next-auth-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,20 +22,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider>
-          <NextUiProvider>
-            <NextTopLoader />
-            <Topbar />
-            {children}
-            <Toaster
-              position="top-center"
-              gutter={8}
-              toastOptions={{
-                duration: 3000,
-              }}
-            />
-          </NextUiProvider>
-        </ThemeProvider>
+        <NextAuthProvider>
+          <ThemeProvider>
+            <NextUiProvider>
+              <NextTopLoader />
+              <Topbar />
+              {children}
+              <Toaster
+                position="top-center"
+                gutter={8}
+                toastOptions={{
+                  duration: 3000,
+                }}
+              />
+            </NextUiProvider>
+          </ThemeProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );

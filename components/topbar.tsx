@@ -17,7 +17,10 @@ import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { signOut, useSession } from "next-auth/react";
 function Topbar() {
+  const { data: session, status } = useSession();
+
   const [userData, setUserData] = useState("nothing");
   const [loading, setLoading] = useState(true);
   const pathname = usePathname();
@@ -90,6 +93,10 @@ function Topbar() {
             <Spinner />
           ) : userData !== "nothing" ? (
             <Button onClick={logout} color="danger">
+              Logout
+            </Button>
+          ) : status === "authenticated" ? (
+            <Button onClick={() => signOut()} color="danger">
               Logout
             </Button>
           ) : (

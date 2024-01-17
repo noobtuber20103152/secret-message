@@ -31,6 +31,8 @@ export default function Page() {
     } catch (error: any) {
       toast.error("username or email already taken!!");
       console.log("Signup failed", error.message);
+    } finally {
+      setLoading(false);
     }
   };
   const [isVisible, setIsVisible] = React.useState(false);
@@ -42,6 +44,16 @@ export default function Page() {
       <Card className="w-full">
         <CardBody>
           <h1 className="text-xl font-bold mb-4">Sign Up Your Account</h1>
+          <div>
+            <Button className="w-full" color="default">
+              Login with Google
+            </Button>
+          </div>
+          <div className="flex justify-center items-center w-full my-5">
+            <hr />
+            <span>Or</span>
+            <hr />
+          </div>
           <div className="my-2">
             <Input
               type="email"
@@ -106,7 +118,7 @@ export default function Page() {
             <p className="text-center mt-2">
               Already have an account{" "}
               <Link href="/login">
-                <span className="text-blue-600">login</span>
+                <span className="text-blue-600">Login</span>
               </Link>{" "}
               here
             </p>

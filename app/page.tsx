@@ -5,9 +5,11 @@ import Topbar from "@/components/topbar";
 import Hero from "@/components/hero";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
-  const [data, setData] = useState("nothing");
+  const [mongodbUser, setData] = useState<any>("nothing");
+  const { data: session, status } = useSession();
   const [loading, setLoading] = useState(true);
   const getUserDetails = async () => {
     try {
@@ -20,12 +22,14 @@ export default function Home() {
     }
   };
   useEffect(() => {
+    setData({
+      data: { username: session?.user?.name, email: session?.user?.email },
+    });
     getUserDetails();
-  }, []);
+  }, [session]);
   return (
     <>
-      
-      <Hero userData={data} />
+      <Hero userData={mongodbUser} />
     </>
   );
 }
