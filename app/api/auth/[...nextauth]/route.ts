@@ -3,8 +3,8 @@
 // authorizationUrl: 'https://accounts.google.com/o/oauth2/auth',
 
 import { authOptions } from "@/providers/next-auth-options";
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
-// authOptions
+
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

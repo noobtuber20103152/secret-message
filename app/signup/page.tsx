@@ -44,16 +44,6 @@ export default function Page() {
       <Card className="w-full">
         <CardBody>
           <h1 className="text-xl font-bold mb-4">Sign Up Your Account</h1>
-          <div>
-            <Button className="w-full" color="default">
-              Login with Google
-            </Button>
-          </div>
-          <div className="flex justify-center items-center w-full my-5">
-            <hr />
-            <span>Or</span>
-            <hr />
-          </div>
           <div className="my-2">
             <Input
               type="email"

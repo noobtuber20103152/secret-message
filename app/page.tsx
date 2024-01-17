@@ -22,6 +22,7 @@ export default function Home() {
     }
   };
   useEffect(() => {
+    console.log(session?.user);
     setData({
       data: { username: session?.user?.name, email: session?.user?.email },
     });
